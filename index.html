@@ -4,123 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karta Lojalnościowa - Mój Sklep</title>
-    
-    <!-- Biblioteka do generowania kodów QR -->
+    <!-- Łączenie z zewnętrznym plikiem CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Biblioteka QR -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-    <!-- Stylizacja CSS -->
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f4f6f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .card-container {
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
-
-        .card-header h1 {
-            font-size: 22px;
-            margin-bottom: 5px;
-        }
-
-        .card-header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-
-        input:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-
-        button {
-            width: 100%;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        #qr-box {
-            margin-top: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 200px;
-        }
-
-        #qrcode {
-            padding: 15px;
-            background: white;
-            border: 2px dashed #007bff;
-            border-radius: 12px;
-            display: inline-block;
-        }
-
-        .info-text {
-            margin-top: 15px;
-            font-size: 13px;
-            color: #6c757d;
-        }
-    </style>
 </head>
 <body>
 
@@ -144,8 +31,6 @@
 </div>
 
 <script>
-    let qrcodeObj = null;
-
     function generujQR() {
         const inputVal = document.getElementById("idKarty").value.trim();
         const qrContainer = document.getElementById("qrcode");
@@ -155,13 +40,10 @@
             return;
         }
 
-        // Czyszczenie poprzedniego kodu QR
         qrContainer.innerHTML = "";
-
-        // Generowanie formatu rozpoznawanego przez POS: KARTA:<ID>
         const trescKodu = "KARTA:" + inputVal;
 
-        qrcodeObj = new QRCode(qrContainer, {
+        new QRCode(qrContainer, {
             text: trescKodu,
             width: 180,
             height: 180,
@@ -171,7 +53,6 @@
         });
     }
 
-    // Wygeneruj kod domyślny przy pierwszym załadowaniu
     window.onload = generujQR;
 </script>
 
